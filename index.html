@@ -26,6 +26,10 @@
             width:50px;
             height:50px;
         }
+        .modal-img{
+            width:200px;
+            height:200px;
+        }
     </style>
   </head>
   <body>
@@ -59,10 +63,11 @@
                     <img id="today-img" src="assets/illust-partly-cloudy.png">
                 </div>
             </div>
+            
             <div class="col-lg-2">
                 <div class="container">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <a href="#myModal" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Sun.png">
@@ -70,46 +75,142 @@
                             <h2 class="card-title next-celcius"></h2>
                             <small id="datetime1" class="next-date"></small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <img class="modal-img" src="assets/small-Sun.png">
+                                            <div class="text-end align-middle">
+                                                <small class="modal-title modal-day"></small><br/>
+                                                <small class="modal-title modal-date"></small><br/>
+                                                <h2 class="card-title modal-celcius"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#myModal2" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <p class="card-text next-day"></p>
-                                <img class="next-img" src="assets/small-Sun.png">
+                                <img class="next-img" src="assets/small-Cloud 3 zap.png">
                             </div>
                             <h2 class="card-title next-celcius"></h2>
                             <small id="datetime1" class="next-date"></small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <img class="modal-img" src="assets/small-Cloud 3 zap.png">
+                                            <div class="text-end align-middle">
+                                                <small class="modal-title modal-day"></small><br/>
+                                                <small class="modal-title modal-date"></small><br/>
+                                                <h2 class="card-title modal-celcius"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#myModal3" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <p class="card-text next-day"></p>
-                                <img class="next-img" src="assets/small-Sun.png">
+                                <img class="next-img" src="assets/small-Cloud little rain.png">
                             </div>
                             <h2 class="card-title next-celcius"></h2>
                             <small id="datetime1" class="next-date"></small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <img class="modal-img" src="assets/small-Cloud little rain.png">
+                                            <div class="text-end align-middle">
+                                                <small class="modal-title modal-day"></small><br/>
+                                                <small class="modal-title modal-date"></small><br/>
+                                                <h2 class="card-title modal-celcius"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#myModal4" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <p class="card-text next-day"></p>
-                                <img class="next-img" src="assets/small-Sun.png">
+                                <img class="next-img" src="assets/small-Sun cloud big rain.png">
                             </div>
                             <h2 class="card-title next-celcius"></h2>
                             <small id="datetime1" class="next-date"></small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <img class="modal-img" src="assets/small-Sun cloud big rain.png">
+                                            <div class="text-end align-middle">
+                                                <small class="modal-title modal-day"></small><br/>
+                                                <small class="modal-title modal-date"></small><br/>
+                                                <h2 class="card-title modal-celcius"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#myModal5" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <p class="card-text next-day"></p>
-                                <img class="next-img" src="assets/small-Sun.png">
+                                <img class="next-img" src="assets/small-Moon cloud zap.png">
                             </div>
                             <h2 class="card-title next-celcius"></h2>
                             <small id="datetime1" class="next-date"></small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <img class="modal-img" src="assets/small-Moon cloud zap.png">
+                                            <div class="text-end align-middle">
+                                                <small class="modal-title modal-day"></small><br/>
+                                                <small class="modal-title modal-date"></small><br/>
+                                                <h2 class="card-title modal-celcius"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#myModal6" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <p class="card-text next-day"></p>
-                                <img class="next-img" src="assets/small-Sun.png">
+                                <img class="next-img" src="assets/small-Sun fast wind.png">
                             </div>
                             <h2 class="card-title next-celcius"></h2>
                             <small id="datetime1" class="next-date"></small>
                         </a>
+                        <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <img class="modal-img" src="assets/small-Sun fast wind.png">
+                                            <div class="text-end align-middle">
+                                                <small class="modal-title modal-day"></small><br/>
+                                                <small class="modal-title modal-date"></small><br/>
+                                                <h2 class="card-title modal-celcius"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

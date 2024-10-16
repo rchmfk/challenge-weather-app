@@ -46,12 +46,31 @@ const nextDate = document.querySelectorAll(".next-date");
 nextDate.forEach((item,index) => {
     item.innerHTML = getTanggal(addDate((index+1)));
 });
-
-dummyCelcius = ['12º','24º','26º','24º','26º','24º']
+const dummyCelcius = ['12º','24º','26º','24º','26º','24º']
 const nextCelcius = document.querySelectorAll(".next-celcius");
 nextCelcius.forEach((item,index) => {
     item.innerHTML = dummyCelcius[index];
 });
+
+const modalDay = document.querySelectorAll(".modal-day");
+modalDay.forEach((item,index) => {
+    item.innerHTML = getHari(addDate((index+1)),"short");
+});
+const modalDate = document.querySelectorAll(".modal-date");
+modalDate.forEach((item,index) => {
+    item.innerHTML = getTanggal(addDate((index+1)));
+});
+const modalCelcius = document.querySelectorAll(".modal-celcius");
+modalCelcius.forEach((item,index) => {
+    item.innerHTML = dummyCelcius[index];
+});
+
+function today(){
+    
+}
+
+function next6Day(){
+}
 
 
 function getWeather(){
