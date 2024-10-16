@@ -1,7 +1,7 @@
 const hari = new Date();
 
-// -------------------------------- Greeting
-function greeting(){
+// -------------------------------- today
+function today(){
     const now = new Date()
     const hour = now.getHours()
     if (hour < 12) {
@@ -34,17 +34,9 @@ function addDate(add){
     return date;
 }
 
-document.querySelector("#greeting").innerHTML = greeting();
-document.querySelector("#greeting-hari").innerHTML = getHari(new Date(),"long");
-document.querySelector("#greeting-date").innerHTML = getTanggal(new Date());
-
-
-
-// const elements = document.querySelectorAll('.next-day');
-// Array.from(elements).forEach((element, index) => {
-//   element[index].innerHTML('Testimonial '+(index+1)+' by each loop');
-//   alert(index)
-// });
+document.querySelector("#today").innerHTML = today();
+document.querySelector("#today-hari").innerHTML = getHari(new Date(),"long");
+document.querySelector("#today-date").innerHTML = getTanggal(new Date());
 
 const nextDay = document.querySelectorAll(".next-day");
 nextDay.forEach((item,index) => {
@@ -60,48 +52,3 @@ const nextCelcius = document.querySelectorAll(".next-celcius");
 nextCelcius.forEach((item,index) => {
     item.innerHTML = dummyCelcius[index];
 });
-
-
-
-// function updateDateTime() {
-//     const now = new Date();
-//     const currentDateTime = now.toLocaleString();
-//     document.querySelector('#datetime').textContent = currentDateTime;
-// }
-// setInterval(updateDateTime, 1000);
-
-// function updateDateTime1() {
-//     date = addDate(1);
-//     document.querySelector('#datetime1').textContent = date;
-// }
-// setInterval(updateDateTime1, 1000);
-
-// function updateDateTime2() {
-//     date = addDate(2);
-//     document.querySelector('#datetime2').textContent = date;
-// }
-// setInterval(updateDateTime2, 1000);
-
-// function updateDateTime3() {
-//     date = addDate(3);
-//     document.querySelector('#datetime3').textContent = date;
-// }
-// setInterval(updateDateTime3, 1000);
-
-// function updateDateTime4() {
-//     date = addDate(4);
-//     document.querySelector('#datetime4').textContent = date;
-// }
-// setInterval(updateDateTime4, 1000);
-
-// function updateDateTime5() {
-//     date = addDate(5);
-//     document.querySelector('#datetime5').textContent = date;
-// }
-// setInterval(updateDateTime5, 1000);
-
-// function updateDateTime6() {
-//     date = addDate(6);
-//     document.querySelector('#datetime6').textContent = date;
-// }
-// setInterval(updateDateTime6, 1000);
