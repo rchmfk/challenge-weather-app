@@ -15,6 +15,9 @@ function getWeather(){
         //     console.error("Error fetching forecast:", error);
         // });
     })
+    city.forEach(function(city) => {
+        console.log()
+    });
     console.log(city)
     
 }

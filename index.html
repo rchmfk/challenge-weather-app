@@ -16,11 +16,20 @@
         }
         body{
             /* background-color: black; */
+            /* background: linear-gradient(to bottom, #202020, #111119); */
+            /* background-image: url('assets/bg-16-24.png');
+            background-size: cover;
+            background-repeat: no-repeat; */
             font-family: "Nunito", sans-serif;
         }
-        .card{
+        .list-group-item{
             border:none;
+            margin-top: 10px;
+            margin-bottom: 10px;
             /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+        }
+        .n3xt-celcius{
+            font-weight: black;
         }
         .next-img{
             width:50px;
@@ -30,6 +39,18 @@
             width:200px;
             height:200px;
         }
+        .glass{
+            background-color: rgba(255, 255, 255, 0.06);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            padding: 50px 25px;
+            -webkit-box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+        }
+        .modal-backdrop { opacity: 0.2 !important; background-color: white;}
+
     </style>
   </head>
   <body>
@@ -72,12 +93,12 @@
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Sun.png">
                             </div>
-                            <h2 class="card-title next-celcius"></h2>
-                            <small id="datetime1" class="next-date"></small>
+                            <h3 class="card-title next-celcius"></h3>
+                            <small class="next-date"></small>
                         </a>
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content glass">
                                     <div class="modal-body">
                                         <div class="d-flex w-100 justify-content-between">
                                             <img class="modal-img" src="assets/small-Sun.png">
@@ -96,12 +117,12 @@
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Cloud 3 zap.png">
                             </div>
-                            <h2 class="card-title next-celcius"></h2>
-                            <small id="datetime1" class="next-date"></small>
+                            <h3 class="card-title next-celcius"></h3>
+                            <small class="next-date"></small>
                         </a>
                         <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content glass">
                                     <div class="modal-body">
                                         <div class="d-flex w-100 justify-content-between">
                                             <img class="modal-img" src="assets/small-Cloud 3 zap.png">
@@ -120,12 +141,12 @@
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Cloud little rain.png">
                             </div>
-                            <h2 class="card-title next-celcius"></h2>
-                            <small id="datetime1" class="next-date"></small>
+                            <h3 class="card-title next-celcius"></h3>
+                            <small class="next-date"></small>
                         </a>
                         <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content glass">
                                     <div class="modal-body">
                                         <div class="d-flex w-100 justify-content-between">
                                             <img class="modal-img" src="assets/small-Cloud little rain.png">
@@ -144,12 +165,12 @@
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Sun cloud big rain.png">
                             </div>
-                            <h2 class="card-title next-celcius"></h2>
-                            <small id="datetime1" class="next-date"></small>
+                            <h3 class="card-title next-celcius"></h3>
+                            <small class="next-date"></small>
                         </a>
                         <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content glass">
                                     <div class="modal-body">
                                         <div class="d-flex w-100 justify-content-between">
                                             <img class="modal-img" src="assets/small-Sun cloud big rain.png">
@@ -168,12 +189,12 @@
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Moon cloud zap.png">
                             </div>
-                            <h2 class="card-title next-celcius"></h2>
-                            <small id="datetime1" class="next-date"></small>
+                            <h3 class="card-title next-celcius"></h3>
+                            <small class="next-date"></small>
                         </a>
                         <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content glass">
                                     <div class="modal-body">
                                         <div class="d-flex w-100 justify-content-between">
                                             <img class="modal-img" src="assets/small-Moon cloud zap.png">
@@ -192,12 +213,12 @@
                                 <p class="card-text next-day"></p>
                                 <img class="next-img" src="assets/small-Sun fast wind.png">
                             </div>
-                            <h2 class="card-title next-celcius"></h2>
-                            <small id="datetime1" class="next-date"></small>
+                            <h3 class="card-title next-celcius"></h3>
+                            <small class="next-date"></small>
                         </a>
                         <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content glass">
                                     <div class="modal-body">
                                         <div class="d-flex w-100 justify-content-between">
                                             <img class="modal-img" src="assets/small-Sun fast wind.png">
