@@ -30,16 +30,31 @@ function getTanggal(date){
     return date.toLocaleDateString("en-EN", options);
 }
 
-const url = "https://api.open-meteo.com/v1/forecast?latitude=-6.291458125315&longitude=106.91251756430&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code"
+// -------------------------------- Get City
+async function getCity(){
+    const city = document.getElementById("city").value;
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
+    const response = await fetch(url);
+    const data = await response.json();
+    const latitude = data.results[0].latitude;
+    const longitude = data.results[0].longitude;
+    const cityName = data.results[0].name;
+    getWeather(latitude, longitude);
+    document.getElementById("today").innerHTML = current() + " " + cityName;
+    document.getElementById("city").value = "";
+}
 
-async function getWeather() {
+
+
+async function getWeather(latitude, longitude) {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
     try {
         const response = await fetch(url);
         const data = await response.json();
         
         // CURRENT---------------------------------------------------------
 
-        document.querySelector("#today").innerHTML = current();
+        // document.querySelector("#today").innerHTML = current();
         document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
@@ -111,7 +126,7 @@ async function getWeather() {
         console.log(error);
     }
 }
-getWeather();
+// getWeather();
 
 
 // Code	Description
