@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <style>
         #today-img{
-            width:100%;
+            width:90%;
             text-align: center;
         }
         #today-temperature{
@@ -28,6 +28,9 @@
             /* margin-top: 10px;
             margin-bottom: 10px; */
             /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+        }
+        .list-group-item:hover{
+            cursor: pointer;
         }
         .n3xt-celcius{
             font-weight: black;
@@ -51,12 +54,22 @@
             border-radius: 8px;
         }
         .modal-backdrop { opacity: 0.2 !important; background-color: white;}
-
+        #hourly{
+            max-width: 100%;
+            overflow-x: auto;
+        }
     </style>
   </head>
   <body>
+
+    
     
     <div class="container pt-4 pb-4 align-center">
+        <div class="row">
+            <div class="col-12">
+                
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-2">
                 <div class="container align-middle">
@@ -78,6 +91,12 @@
                     <div class="list-group" id="tes">
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div id="hourly" class="col-12">
+                <ul id="current-hourly" class="list-group list-group-horizontal">
+                </ul>
             </div>
         </div>
     </div>

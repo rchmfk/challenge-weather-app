@@ -1,7 +1,7 @@
 const hari = new Date();
 
 // -------------------------------- today
-function today(){
+function current(){
     const now = new Date()
     const hour = now.getHours()
     if (hour < 12) {
@@ -30,34 +30,16 @@ function getTanggal(date){
     return date.toLocaleDateString("en-EN", options);
 }
 
-function addDate(add){
-    const date = new Date();
-    date.setDate(date.getDate() + add);
-    return date;
-}
-
-// function dateFormatted(date) {
-//     const options = {
-//         weekday: "long",
-//         year: "numeric",
-//         month: "long",
-//         day: "numeric",
-//     };
-//     const dateFormatted = new Date(date);
-//     return dateFormatted.toLocaleDateString("id-ID", options);
-// }
-
-const url = "https://api.open-meteo.com/v1/forecast?latitude=-6.291458125315&longitude=106.91251756430&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant"
-
-{/* <script src="https://gist.github.com/stellasphere/9490c195ed2b53c707087c8c2db4ec0c.js"></script> */}
+const url = "https://api.open-meteo.com/v1/forecast?latitude=-6.291458125315&longitude=106.91251756430&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code"
 
 async function getWeather() {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        // alert(data.current)
-        today()
-        document.querySelector("#today").innerHTML = today();
+        
+        // CURRENT---------------------------------------------------------
+
+        document.querySelector("#today").innerHTML = current();
         document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
@@ -78,17 +60,34 @@ async function getWeather() {
         `
         ;
 
+        // HOURLY-----------------------------------------------------------
+        document.getElementById("current-hourly").innerHTML = ``
+        for (let i = 0; i < 24; i++) {
+            document.getElementById("current-hourly").innerHTML += `
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="card-text next-day">${data.hourly.time[i].split("T")[1]}</p>
+                    ${data.hourly.weather_code[i]}
+                </div>
+                <h3 class="card-title next-celcius">${data.hourly.temperature_2m[i]}º</h3>
+            </div>
+            `
+        }
+
+        // DAILY-----------------------------------------------------------
+
+        document.getElementById("tes").innerHTML = ``
         data.daily.time.forEach((el, i) => {
             if(i>0){
                 document.getElementById("tes").innerHTML += `
-                <a href="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <p class="card-text next-day">${getHari(new Date(data.daily.time[i]),"short")}</p>
                         <img class="next-img" src="assets/small-Sun.png">
                     </div>
                     <h3 class="card-title next-celcius">${data.daily.temperature_2m_max[i]}º</h3>
                     <small><small class="next-date">${getTanggal(new Date(data.daily.time[i]))}</small></small>
-                </a>
+                </div>
                 <div class="modal fade" id="myModal${i}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                         <div class="modal-content glass">
