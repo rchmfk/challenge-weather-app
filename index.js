@@ -197,13 +197,12 @@ async function getWeather(latitude, longitude, city) {
         data.daily.time.forEach((el, i) => {
             if(i>0){
                 document.getElementById("daily").innerHTML += `
-                <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
                     <div class="d-flex w-100 justify-content-between">
-                        <p class="card-text next-day">${getHari(new Date(data.daily.time[i]),"short")}</p>
-                        <img class="next-img" src="assets/small-Sun.png">
+                        <b class="card-text next-day" style="margin:auto;">${getHari(new Date(data.daily.time[i]),"short")}</b>
+                        <h7 class="card-text next-celcius" style="margin:auto;">${data.daily.temperature_2m_max[i]}</h7>
+                        <img class="next-img" src="assets/small-Sun.png" style="margin:auto;">
                     </div>
-                    <h3 class="card-title next-celcius">${data.daily.temperature_2m_max[i]}º</h3>
-                    <small><small class="next-date">${getTanggal(new Date(data.daily.time[i]))}</small></small>
                 </div>
                 <div class="modal fade" id="myModal${i}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
