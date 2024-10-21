@@ -1,3 +1,7 @@
+function capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1);
+}
+
 const hari = new Date();
 
 // -------------------------------- today
@@ -30,6 +34,19 @@ function getTanggal(date){
     return date.toLocaleDateString("en-EN", options);
 }
 
+// -------------------------------- Get Position
+function getPosition(position) {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    getWeather(latitude, longitude, ' ');
+}
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getPosition);
+    }
+}
+getLocation();
+
 // -------------------------------- Get City
 async function getCity(){
     const city = document.getElementById("city").value;
@@ -38,15 +55,13 @@ async function getCity(){
     const data = await response.json();
     const latitude = data.results[0].latitude;
     const longitude = data.results[0].longitude;
-    const cityName = data.results[0].name;
-    getWeather(latitude, longitude);
-    document.getElementById("today").innerHTML = current() + " " + cityName;
+    getWeather(latitude, longitude, city);
     document.getElementById("city").value = "";
 }
 
 
 
-async function getWeather(latitude, longitude) {
+async function getWeather(latitude, longitude, city) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
     try {
         const response = await fetch(url);
@@ -54,10 +69,11 @@ async function getWeather(latitude, longitude) {
         
         // CURRENT---------------------------------------------------------
 
-        // document.querySelector("#today").innerHTML = current();
+        document.querySelector("#today").innerHTML = current() + '<br>' + capitalize(city);
         document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
+        document.querySelector("#today-img-div").innerHTML = `<img id="today-img" src="assets/illust-partly-cloudy.png">`;
         document.querySelector("#today-desc").innerHTML = `
         <small>
         interval: ${data.current.interval}<br/>
