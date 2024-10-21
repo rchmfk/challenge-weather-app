@@ -62,7 +62,7 @@ async function getCity(){
 
 
 async function getWeather(latitude, longitude, city) {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -74,22 +74,108 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
         document.querySelector("#today-img-div").innerHTML = `<img id="today-img" src="assets/illust-partly-cloudy.png">`;
-        document.querySelector("#today-desc").innerHTML = `
-        <small>
-        interval: ${data.current.interval}<br/>
-        relative_humidity_2m: ${data.current.relative_humidity_2m}<br/>
-        temperature_2m: ${data.current.temperature_2m}<br/>
-        apparent_temperature: ${data.current.apparent_temperature}<br/>
-        is_day: ${data.current.is_day}<br/>
-        rain: ${data.current.rain}<br/>
-        showers: ${data.current.showers}<br/>
-        weather_code: ${data.current.weather_code}<br/>
-        wind_speed_10m: ${data.current.wind_speed_10m}<br/>
-        wind_direction_10m: ${data.current.wind_direction_10m}<br/>
-        wind_gusts_10m: ${data.current.wind_gusts_10m}<br/>
-        </small>
-        `
-        ;
+        
+        
+        // data.current.forEach((el, i) => {
+        document.getElementById("today-desc").innerHTML = `
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Interval</p>
+                    <span>
+                        <h3 class="card-title">${data.current.interval}</h3>
+                        <small><small>${data.current_units.interval}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                    <p class="card-text">Temperature</p>
+                    <span>
+                        <h3 class="card-title">${data.current.temperature_2m}</h3>
+                        <small><small>${data.current_units.temperature_2m}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Relative Humidity</p>
+                    <span>
+                        <h3 class="card-title">${data.current.relative_humidity_2m}</h3>
+                        <small><small>${data.current_units.relative_humidity_2m}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Apparent Temperature</p>
+                    <span>
+                        <h3 class="card-title">${data.current.apparent_temperature}</h3>
+                        <small><small>${data.current_units.apparent_temperature}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Precipitation</p>
+                    <span>
+                        <h3 class="card-title">${data.current.precipitation}</h3>
+                        <small><small>${data.current_units.precipitation}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Cloud Cover</p>
+                    <span>
+                        <h3 class="card-title">${data.current.cloud_cover}</h3>
+                        <small><small>${data.current_units.cloud_cover}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Wind Speed</p>
+                    <span>
+                        <h3 class="card-title">${data.current.wind_speed_10m}</h3>
+                        <small><small>${data.current_units.wind_speed_10m}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Wind Direction</p>
+                    <span>
+                        <h3 class="card-title">${data.current.wind_direction_10m}</h3>
+                        <small><small>${data.current_units.wind_direction_10m}</small></small>
+                    </span>
+                </div>
+            </div>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between align-middle text-right">
+                <p class="card-text">Wimd Gusts</p>
+                    <span>
+                        <h3 class="card-title">${data.current.wind_gusts_10m}</h3>
+                        <small><small>${data.current_units.wind_gusts_10m}</small></small>
+                    </span>
+                </div>
+            </div>
+        `;
+        // document.querySelector("#today-desc").innerHTML = `
+        // <small>
+        // interval: ${data.current.interval}<br/>
+        // relative_humidity_2m: ${data.current.relative_humidity_2m}<br/>
+        // temperature_2m: ${data.current.temperature_2m}<br/>
+        // apparent_temperature: ${data.current.apparent_temperature}<br/>
+        // is_day: ${data.current.is_day}<br/>
+        // rain: ${data.current.rain}<br/>
+        // showers: ${data.current.showers}<br/>
+        // weather_code: ${data.current.weather_code}<br/>
+        // wind_speed_10m: ${data.current.wind_speed_10m}<br/>
+        // wind_direction_10m: ${data.current.wind_direction_10m}<br/>
+        // wind_gusts_10m: ${data.current.wind_gusts_10m}<br/>
+        // </small>
+        // `
+        // ;
 
         // HOURLY-----------------------------------------------------------
         document.getElementById("current-hourly").innerHTML = ``
@@ -107,10 +193,10 @@ async function getWeather(latitude, longitude, city) {
 
         // DAILY-----------------------------------------------------------
 
-        document.getElementById("tes").innerHTML = ``
+        document.getElementById("daily").innerHTML = ``
         data.daily.time.forEach((el, i) => {
             if(i>0){
-                document.getElementById("tes").innerHTML += `
+                document.getElementById("daily").innerHTML += `
                 <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <p class="card-text next-day">${getHari(new Date(data.daily.time[i]),"short")}</p>
@@ -144,8 +230,23 @@ async function getWeather(latitude, longitude, city) {
 }
 // getWeather();
 
+// -------------------------------- Get City
 
-// Code	Description
+async function getWeatherCode(){
+    const url = 'wmo-code.json'
+    const response = await fetch(url)
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+    // const data = await response.json();
+    // const latitude = data.results[0].latitude;
+    // const longitude = data.results[0].longitude;
+    // getWeather(latitude, longitude, city);
+    // document.getElementById("city").value = "";
+}
+
+getWeatherCode()
+
+// Weather Code	Description
 // 0	Clear sky
 // 1, 2, 3	Mainly clear, partly cloudy, and overcast
 // 45, 48	Fog and depositing rime fog
