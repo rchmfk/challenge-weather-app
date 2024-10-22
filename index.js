@@ -74,7 +74,7 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
         document.querySelector("#today-temperature2").innerHTML = "Feels like "+data.current.apparent_temperature+"º";
-        // document.querySelector("#today-img-div").innerHTML = `<img id="today-img" src="assets/illust-partly-cloudy.png">`;
+        document.querySelector("#today-img-div").innerHTML = `<img class="position-absolute translate-middle" id="" src="${wmo[data.current.weather_code].illust}" width="500px" style="top:0px ;left:280px;">`;
         
         
         // data.current.forEach((el, i) => {
@@ -185,7 +185,7 @@ async function getWeather(latitude, longitude, city) {
             <div class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <p class="card-text next-day">${data.hourly.time[i].split("T")[1]}</p>
-                    ${data.hourly.weather_code[i]}
+                    <img class="next-img" src="${wmo[data.hourly.weather_code[i]].image}" style="margin:auto;">
                 </div>
                 <h3 class="card-title next-celcius">${data.hourly.temperature_2m[i]}º</h3>
             </div>
@@ -202,7 +202,7 @@ async function getWeather(latitude, longitude, city) {
                     <div class="d-flex w-100 justify-content-between">
                         <b class="card-text next-day" style="margin:auto;">${getHari(new Date(data.daily.time[i]),"short")}</b>
                         <h7 class="card-text next-celcius" style="margin:auto;">${data.daily.temperature_2m_max[i]}</h7>
-                        <img class="next-img" src="assets/small-Sun.png" style="margin:auto;">
+                        <img class="next-img" src="${wmo[data.daily.weather_code[i]].image}" style="margin:auto;">
                     </div>
                 </div>
                 <div class="modal fade" id="myModal${i}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
@@ -210,7 +210,7 @@ async function getWeather(latitude, longitude, city) {
                         <div class="modal-content glass">
                             <div class="modal-body">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <img class="modal-img" src="assets/small-Sun.png">
+                                    <img class="modal-img" src="${wmo[data.daily.weather_code[i]].image}">
                                     <div class="text-end align-middle">
                                         <small class="modal-title modal-day">${getHari(new Date(data.daily.time[i]),"short")}</small><br/>
                                         <small class="modal-title modal-date">${getTanggal(new Date(data.daily.time[i]))}</small><br/>
@@ -230,21 +230,6 @@ async function getWeather(latitude, longitude, city) {
 }
 // getWeather();
 
-// -------------------------------- Get City
-
-async function getWeatherCode(){
-    const url = 'wmo-code.json'
-    const response = await fetch(url)
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-    // const data = await response.json();
-    // const latitude = data.results[0].latitude;
-    // const longitude = data.results[0].longitude;
-    // getWeather(latitude, longitude, city);
-    // document.getElementById("city").value = "";
-}
-
-getWeatherCode()
 
 // Weather Code	Description
 // 0	Clear sky
