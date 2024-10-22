@@ -73,7 +73,8 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
-        document.querySelector("#today-img-div").innerHTML = `<img id="today-img" src="assets/illust-partly-cloudy.png">`;
+        document.querySelector("#today-temperature2").innerHTML = "Feels like "+data.current.apparent_temperature+"º";
+        // document.querySelector("#today-img-div").innerHTML = `<img id="today-img" src="assets/illust-partly-cloudy.png">`;
         
         
         // data.current.forEach((el, i) => {
@@ -259,3 +260,19 @@ getWeatherCode()
 // 85, 86	Snow showers slight and heavy
 // 95 *	Thunderstorm: Slight or moderate
 // 96, 99 *	Thunderstorm with slight and heavy hail
+
+
+// async function getWeather() {
+//     try {
+//         const response = await fetch(url2);
+//         if (!response.ok) {
+//             throw new Error("Failed to fetch weather data");
+//         }
+//         const data = await response.json();
+//         console.log(data);
+//     } catch (err) {
+//         console.log(err);
+//     } finally {
+//         console.log("done");
+//     }
+// }
