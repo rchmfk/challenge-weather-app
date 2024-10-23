@@ -33,6 +33,13 @@ function getTanggal(date){
     };
     return date.toLocaleDateString("en-EN", options);
 }
+function getWaktu(date){
+    const options = {
+        hour: "2-digit",
+        minute: "2-digit"
+    };
+    return date.toLocaleTimeString("en-EN", options);
+}
 
 // -------------------------------- Get Position
 function getPosition(position) {
@@ -69,126 +76,90 @@ async function getWeather(latitude, longitude, city) {
         
         // CURRENT---------------------------------------------------------
 
-        document.querySelector("#today").innerHTML = current() + '<br>' + capitalize(city);
+        // document.querySelector("#today").innerHTML = current() + '<br>' + capitalize(city);
         document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
-        document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
-        document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
-        document.querySelector("#today-temperature2").innerHTML = "Feels like "+data.current.apparent_temperature+"º";
+        document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time))+", "+getWaktu(new Date(data.current.time));
+        document.querySelector("#today-temperature").innerHTML = parseInt(data.current.temperature_2m)+"º";
+        document.querySelector("#today-temperature2").innerHTML = "Feels like "+parseInt(data.current.apparent_temperature)+"º";
         // document.querySelector("#today-img-div").innerHTML = `<img class="position-absolute translate-middle" id="" src="${wmo[data.current.weather_code].illust}" width="450px" style="top:0px ;left:280px;">`;
-        document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].illust}" width="100%" >`;
+        document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].illust}" width="80%" >`;
         
         
-        // data.current.forEach((el, i) => {
         document.getElementById("today-desc").innerHTML = `
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Interval</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Interval</small></small>
                         <h3 class="card-title">${data.current.interval}</h3>
                         <small><small>${data.current_units.interval}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                    <p class="card-text">Temperature</p>
-                    <span>
-                        <h3 class="card-title">${data.current.temperature_2m}</h3>
-                        <small><small>${data.current_units.temperature_2m}</small></small>
-                    </span>
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Relative Humidity</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Relative Humidity</small></small>
                         <h3 class="card-title">${data.current.relative_humidity_2m}</h3>
                         <small><small>${data.current_units.relative_humidity_2m}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Apparent Temperature</p>
-                    <span>
-                        <h3 class="card-title">${data.current.apparent_temperature}</h3>
-                        <small><small>${data.current_units.apparent_temperature}</small></small>
-                    </span>
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Precipitation</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Precipitation</small></small>
                         <h3 class="card-title">${data.current.precipitation}</h3>
                         <small><small>${data.current_units.precipitation}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Cloud Cover</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Cloud Cover</small></small>
                         <h3 class="card-title">${data.current.cloud_cover}</h3>
                         <small><small>${data.current_units.cloud_cover}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Wind Speed</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Wind Speed</small></small>
                         <h3 class="card-title">${data.current.wind_speed_10m}</h3>
                         <small><small>${data.current_units.wind_speed_10m}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Wind Direction</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Wind Direction</small></small>
                         <h3 class="card-title">${data.current.wind_direction_10m}</h3>
                         <small><small>${data.current_units.wind_direction_10m}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between align-middle text-right">
-                <p class="card-text">Wimd Gusts</p>
-                    <span>
+            <div class="card mb-4">
+                <div class="card-body p-0">
+                    <div class="d-flex">
+                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Wind Gusts</small></small>
                         <h3 class="card-title">${data.current.wind_gusts_10m}</h3>
                         <small><small>${data.current_units.wind_gusts_10m}</small></small>
-                    </span>
+                    </div>
                 </div>
             </div>
         `;
-        // document.querySelector("#today-desc").innerHTML = `
-        // <small>
-        // interval: ${data.current.interval}<br/>
-        // relative_humidity_2m: ${data.current.relative_humidity_2m}<br/>
-        // temperature_2m: ${data.current.temperature_2m}<br/>
-        // apparent_temperature: ${data.current.apparent_temperature}<br/>
-        // is_day: ${data.current.is_day}<br/>
-        // rain: ${data.current.rain}<br/>
-        // showers: ${data.current.showers}<br/>
-        // weather_code: ${data.current.weather_code}<br/>
-        // wind_speed_10m: ${data.current.wind_speed_10m}<br/>
-        // wind_direction_10m: ${data.current.wind_direction_10m}<br/>
-        // wind_gusts_10m: ${data.current.wind_gusts_10m}<br/>
-        // </small>
-        // `
-        // ;
 
         // HOURLY-----------------------------------------------------------
         document.getElementById("current-hourly").innerHTML = ``
         for (let i = 0; i < 24; i++) {
             document.getElementById("current-hourly").innerHTML += `
-            <div class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="card-text next-day">${data.hourly.time[i].split("T")[1]}</p>
-                    <img class="next-img" src="${wmo[data.hourly.weather_code[i]].image}" style="margin:auto;">
-                </div>
-                <h3 class="card-title next-celcius">${data.hourly.temperature_2m[i]}º</h3>
+            <div class="list-group-item list-group-item-action flex-column align-items-start text-center" style="min-width:150px;">
+            <p class="card-text next-day">${data.hourly.time[i].split("T")[1]}</p>
+            <p class="card-title next-celcius">${parseInt(data.hourly.temperature_2m[i])}º</p>
+                <img class="" src="${wmo[data.hourly.weather_code[i]].image}" style="width:100%;margin:auto;margin-bottom:-20px;">
+                <small><small>${wmo[data.hourly.weather_code[i]].description}</small></small>
             </div>
             `
         }
@@ -202,7 +173,7 @@ async function getWeather(latitude, longitude, city) {
                 <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <b class="card-text next-day" style="margin:auto;">${getHari(new Date(data.daily.time[i]),"short")}</b>
-                        <h7 class="card-text next-celcius" style="margin:auto;">${data.daily.temperature_2m_max[i]}º</h7>
+                        <h7 class="card-text next-celcius" style="margin:auto;">${parseInt(data.daily.temperature_2m_max[i])}º</h7>
                         <img class="next-img" src="${wmo[data.daily.weather_code[i]].image}" style="margin:auto;">
                     </div>
                 </div>
@@ -215,7 +186,7 @@ async function getWeather(latitude, longitude, city) {
                                     <div class="text-end align-middle">
                                         <small class="modal-title modal-day">${getHari(new Date(data.daily.time[i]),"short")}</small><br/>
                                         <small class="modal-title modal-date">${getTanggal(new Date(data.daily.time[i]))}</small><br/>
-                                        <h2 class="card-title modal-celcius">${data.daily.temperature_2m_max[i]}º</h2>
+                                        <h2 class="card-title modal-celcius">${parseInt(data.daily.temperature_2m_max[i])}º</h2>
                                     </div>
                                 </div>
                             </div>
@@ -229,24 +200,6 @@ async function getWeather(latitude, longitude, city) {
         console.log(error);
     }
 }
-// getWeather();
-
-
-// Weather Code	Description
-// 0	Clear sky
-// 1, 2, 3	Mainly clear, partly cloudy, and overcast
-// 45, 48	Fog and depositing rime fog
-// 51, 53, 55	Drizzle: Light, moderate, and dense intensity
-// 56, 57	Freezing Drizzle: Light and dense intensity
-// 61, 63, 65	Rain: Slight, moderate and heavy intensity
-// 66, 67	Freezing Rain: Light and heavy intensity
-// 71, 73, 75	Snow fall: Slight, moderate, and heavy intensity
-// 77	Snow grains
-// 80, 81, 82	Rain showers: Slight, moderate, and violent
-// 85, 86	Snow showers slight and heavy
-// 95 *	Thunderstorm: Slight or moderate
-// 96, 99 *	Thunderstorm with slight and heavy hail
-
 
 // async function getWeather() {
 //     try {
