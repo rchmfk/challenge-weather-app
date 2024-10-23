@@ -74,7 +74,8 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
         document.querySelector("#today-temperature").innerHTML = data.current.temperature_2m+"º";
         document.querySelector("#today-temperature2").innerHTML = "Feels like "+data.current.apparent_temperature+"º";
-        document.querySelector("#today-img-div").innerHTML = `<img class="position-absolute translate-middle" id="" src="${wmo[data.current.weather_code].illust}" width="500px" style="top:0px ;left:280px;">`;
+        // document.querySelector("#today-img-div").innerHTML = `<img class="position-absolute translate-middle" id="" src="${wmo[data.current.weather_code].illust}" width="450px" style="top:0px ;left:280px;">`;
+        document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].illust}" width="100%" >`;
         
         
         // data.current.forEach((el, i) => {
@@ -198,10 +199,10 @@ async function getWeather(latitude, longitude, city) {
         data.daily.time.forEach((el, i) => {
             if(i>0){
                 document.getElementById("daily").innerHTML += `
-                <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
+                <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <b class="card-text next-day" style="margin:auto;">${getHari(new Date(data.daily.time[i]),"short")}</b>
-                        <h7 class="card-text next-celcius" style="margin:auto;">${data.daily.temperature_2m_max[i]}</h7>
+                        <h7 class="card-text next-celcius" style="margin:auto;">${data.daily.temperature_2m_max[i]}º</h7>
                         <img class="next-img" src="${wmo[data.daily.weather_code[i]].image}" style="margin:auto;">
                     </div>
                 </div>
