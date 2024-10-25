@@ -149,8 +149,8 @@ async function getWeather(latitude, longitude, city) {
                                     <div class="text-end align-middle">
                                         <h5 id="today-hari">${getHari(new Date(data.daily.time[i]),"long")}</h5>
                                         <p id="today-date">${getTanggal(new Date(data.daily.time[i]))}</p>
-                                        <h2 class="card-title font-size-100 font-weight-700">${parseInt(data.daily.temperature_2m_max[i])}º</h2>
-                                        <p style="">${parseInt(data.daily.temperature_2m_min[i])}º - ${parseInt(data.daily.temperature_2m_max[i])}º</p>
+                                        <h2 class="card-title font-size-100 font-weight-700">${parseInt(data.daily.temperature_2m_min[i])}º</h2>
+                                        <p style="">Temperature ${parseInt(data.daily.temperature_2m_min[i])}º - ${parseInt(data.daily.temperature_2m_max[i])}º</p>
                                     </div>
                                 </div>
                             </div>

@@ -9,25 +9,16 @@ const wmo = {
 		"image":"assets/1-small-sun.png",
 		"illust":"assets/1-big-sun.png"
 	},
-
-
-
 	2:{
 		"description":"Partly Cloudy",
 		"image":"assets/2-small-sun-cloud.png",
 		"illust":"assets/2-big-sun-cloud.png"
 	},
-
-
-
 	3:{
 		"description":"Cloudy",
 		"image":"assets/3-small-cloud.png",
 		"illust":"assets/3-big-cloud.png"
 	},
-
-
-
 	45:{
 		"description":"Foggy",
 		"image":"assets/4-small-wind.png",
@@ -38,9 +29,6 @@ const wmo = {
 		"image":"assets/4-small-wind.png",
 		"illust":"assets/4-big-wind.png"
 	},
-
-
-
 	51:{
 		"description":"Light Drizzle",
 		"image":"assets/5-small-rain.png",
@@ -82,9 +70,6 @@ const wmo = {
 		"image":"assets/5-small-rain.png",
 		"illust":"assets/5-big-rain.png"
 	},
-
-
-
 	61:{
 		"description":"Light Rain",
 		"image":"assets/6-small-sun rain.png",
@@ -110,9 +95,6 @@ const wmo = {
 		"image":"assets/6-small-sun rain.png",
 		"illust":"assets/6-big-sun rain.png"
 	},
-
-
-
 	71:{
 		"description":"Light Snow",
 		"image":"assets/7-small-snow.png",
@@ -143,9 +125,6 @@ const wmo = {
 		"image":"assets/7-small-snow.png",
 		"illust":"assets/7-big-snow.png"
 	},
-
-
-	
 	95:{
 		"description":"Thunderstorm",
 		"image":"assets/8-small-thunder.png",
