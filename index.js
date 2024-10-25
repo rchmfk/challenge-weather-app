@@ -1,19 +1,5 @@
 const hari = new Date();
 
-// -------------------------------- current
-function current(){
-    const now = hari
-    const hour = now.getHours()
-    if (hour < 12) {
-        return 'Good Morning';
-    } else if (hour < 16) {
-        return 'Good Afternoon';
-    } else if (hour < 21) {
-        return 'Good Evening';
-    } else {
-        return 'Good Night';
-    }
-}
 // -------------------------------- Get Hari
 function getHari(date,type){
     const options = {
@@ -70,6 +56,21 @@ async function getCity(){
     }
 }
 
+// -------------------------------- current
+function getGreeting(){
+    const now = hari
+    const hour = now.getHours()
+    if (hour < 12) {
+        return 'Good Morning';
+    } else if (hour < 16) {
+        return 'Good Afternoon';
+    } else if (hour < 21) {
+        return 'Good Evening';
+    } else {
+        return 'Good Night';
+    }
+}
+
 // -------------------------------- Get Weather
 async function getWeather(latitude, longitude, city) {
     try {
@@ -96,7 +97,7 @@ async function getWeather(latitude, longitude, city) {
         const currentWeather             = wmo[currentWeatherCode].description;
         const currentDesc                = `Cloud cover ${currentCloudCover}. Relative humidity is ${currentRelativeHumidity}. Precitipation ${currentPrecipitation}. Winds direction ${currentWindDirection} at ${currentWindSpeed} and ${currentWindGusts} gusts. Interval ${currentInterval}`
 
-        document.querySelector("#current").innerHTML = current() + ' ' + city;
+        document.querySelector("#current").innerHTML = getGreeting() + ' ' + city;
         document.querySelector("#current-weather").innerHTML = currentWeather;
         document.querySelector("#current-desc").innerHTML = currentDesc;
         // document.querySelector("#current-rain").innerHTML = currentRain;

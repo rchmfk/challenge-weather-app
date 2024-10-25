@@ -14,8 +14,8 @@
 <body>
     <main class="container hidden">
         <div class="row">
-            <div class="col-lg-4" style="margin-bottom:30px;margin-top:20px;"></div>
-            <div class="col-lg-4" style="margin-bottom:30px;margin-top:20px;">
+            <div class="col-lg-4"></div>
+            <div id="search" class="col-lg-4">
                 <h5 class="card-title font-weight-800">Weather App</h5>
                 <p class="card-text">Stay prepared for upcoming weather with accurate daily weather data.</p>
                 <!-- SEARCH FEATURE -->
@@ -24,17 +24,17 @@
                     <button class="btn btn-outline-primary" onclick="getCity()">Search</button>
                 </div>
             </div>
-            <div class="col-lg-4" style="margin-bottom:30px;margin-top:20px;"></div>
+            <div class="col-lg-4"></div>
         </div>
         <div class="row">
             <div class="col-lg-9 align-self-stretch" style="padding-right: 100px;">
-                <div class="d-flex flex-column" style="height:100%">
+                <div class="d-flex flex-column height-100">
                     <div class="row h-100">
                         <!-- CURRENT DESC -->
                         <div class="col-lg align-self-stretch">
                             <p id="current"></p>
-                            <h2 class="font-size-100 font-weight-800" id="current-weather"></h2>
-                            <p id="current-desc" style="text-align: justify;text-justify: inter-word;"></p>
+                            <h2 class="font-size-80 font-weight-800" id="current-weather"></h2>
+                            <p id="current-desc"></p>
                             
                         </div>
                         <!-- CURRENT IMAGE -->
@@ -50,13 +50,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3" style="text-align: right;">
-                <div class="d-flex flex-column" style="height:100%">
+            <div class="col-lg-3 text-right">
+                <div class="d-flex flex-column height-100">
                     <div class="h-100">
                     <!-- CURRENT DATE & TEMPERATURE -->
                         <h5 id="today-hari"></h5>
                         <p id="today-date"></p>
-                        <h2 class="font-size-180 font-weight-600" id="current-temperature"></h2>
+                        <h2 class="font-size-150 font-weight-600" id="current-temperature"></h2>
                         <p id="current-apparent-temperature" style="margin-top:-20px;"></p>
                     </div>
                     <!-- DAILY -->
