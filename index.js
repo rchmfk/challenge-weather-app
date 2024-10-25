@@ -38,6 +38,7 @@ function getWaktu(date){
     return date.toLocaleTimeString("en-EN", options);
 }
 
+// -------------------------------- Get City
 async function getCity(){
     try {
         const city = document.getElementById("city").value;
@@ -77,17 +78,12 @@ async function getWeather(latitude, longitude, city) {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
         const response = await fetch(url);
         const data = await response.json();
-        // document.querySelector(".hidden").style.display = "block";
-        const currentTime                = data.current.time;
         const currentInterval            = data.current.interval+" "+data.current_units.interval;
         const currentTemperature         = `${parseInt(data.current.temperature_2m)}º`;
         const currentRelativeHumidity    = data.current.relative_humidity_2m+""+data.current_units.relative_humidity_2m;
         const currentApparentTemperature = parseInt(data.current.apparent_temperature)+"º";
         const currentIsDay               = data.current.is_day+""+data.current_units.is_day;
         const currentPrecipitation       = data.current.precipitation+" "+data.current_units.precipitation;
-        const currentRain                = `<h3 class="font-weight-600" id="current-rain">${data.current.rain} <small><small style="font-size:9px;">${data.current_units.rain}</small></small></h3>`;
-        const currentShowers             = `<h3 class="font-weight-600" id="current-rain">${data.current.showers} <small><small style="font-size:9px;">${data.current_units.showers}</small></small></h3>`;
-        const currentSnowfall            = `<h3 class="font-weight-600" id="current-rain">${data.current.snowfall} <small><small style="font-size:9px;">${data.current_units.snowfall}</small></small></h3>`;
         const currentWeatherCode         = data.current.weather_code;
         const currentCloudCover          = data.current.cloud_cover+""+data.current_units.cloud_cover;
         const currentWindSpeed           = data.current.wind_speed_10m+" "+data.current_units.wind_speed_10m;
@@ -100,10 +96,6 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#current").innerHTML = getGreeting() + ' ' + city;
         document.querySelector("#current-weather").innerHTML = currentWeather;
         document.querySelector("#current-desc").innerHTML = currentDesc;
-        // document.querySelector("#current-rain").innerHTML = currentRain;
-        // document.querySelector("#current-showers").innerHTML = currentShowers;
-        // document.querySelector("#current-snowfall").innerHTML = currentSnowfall;
-
         document.querySelector("#current-temperature").innerHTML = currentTemperature;
         document.querySelector("#current-apparent-temperature").innerHTML = "Feels like "+ currentApparentTemperature;
         document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].image}" width="100%">`;
