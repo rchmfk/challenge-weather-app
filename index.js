@@ -1,4 +1,8 @@
+// -------------------------------- Define Today
 const hari = new Date();
+
+// -------------------------------- Call Function Get Location
+getLocation();
 
 // -------------------------------- Get Position
 function getPosition(position) {
@@ -12,7 +16,6 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(getPosition);
     }
 }
-getLocation();
 // -------------------------------- Get Hari
 function getHari(date,type){
     const options = {
@@ -23,32 +26,31 @@ function getHari(date,type){
 // -------------------------------- Get Tanggal
 function getTanggal(date){
     const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
+        year    : "numeric",
+        month   : "long",
+        day     : "numeric",
     };
     return date.toLocaleDateString("en-EN", options);
-}
-// -------------------------------- Get Waktu
-function getWaktu(date){
-    const options = {
-        hour: "2-digit",
-        minute: "2-digit"
-    };
-    return date.toLocaleTimeString("en-EN", options);
 }
 
 // -------------------------------- Get City
 async function getCity(){
     try {
-        const city = document.getElementById("city").value;
-        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
-        const response = await fetch(url);
-        const data = await response.json();
-        const latitude = data.results[0].latitude;
+        // Define
+        const city      = document.getElementById("city").value;
+        const url       = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
+        const response  = await fetch(url);
+        const data      = await response.json();
+        const latitude  = data.results[0].latitude;
         const longitude = data.results[0].longitude;
+
+        // Hide display
         document.querySelector(".hidden").style.display = "none";
+        
+        // Run getWeather function
         getWeather(latitude, longitude, city);
+        
+        // Show display
         document.getElementById("city").value = "";
     } catch (err) {
         alert("Data tidak ditemukan");
@@ -75,36 +77,36 @@ function getGreeting(){
 // -------------------------------- Get Weather
 async function getWeather(latitude, longitude, city) {
     try {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
-        const response = await fetch(url);
-        const data = await response.json();
+        // Define
+        const url                        = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
+        const response                   = await fetch(url);
+        const data                       = await response.json();
         const currentInterval            = data.current.interval+" "+data.current_units.interval;
         const currentTemperature         = `${parseInt(data.current.temperature_2m)}º`;
         const currentRelativeHumidity    = data.current.relative_humidity_2m+""+data.current_units.relative_humidity_2m;
         const currentApparentTemperature = parseInt(data.current.apparent_temperature)+"º";
-        const currentIsDay               = data.current.is_day+""+data.current_units.is_day;
         const currentPrecipitation       = data.current.precipitation+" "+data.current_units.precipitation;
         const currentWeatherCode         = data.current.weather_code;
         const currentCloudCover          = data.current.cloud_cover+""+data.current_units.cloud_cover;
         const currentWindSpeed           = data.current.wind_speed_10m+" "+data.current_units.wind_speed_10m;
         const currentWindDirection       = data.current.wind_direction_10m+""+data.current_units.wind_direction_10m;
         const currentWindGusts           = data.current.wind_gusts_10m+" "+data.current_units.wind_gusts_10m;
-
         const currentWeather             = wmo[currentWeatherCode].description;
         const currentDesc                = `Cloud cover ${currentCloudCover}. Relative humidity is ${currentRelativeHumidity}. Precitipation ${currentPrecipitation}. Winds direction ${currentWindDirection} at ${currentWindSpeed} and ${currentWindGusts} gusts. Interval ${currentInterval}`
 
-        document.querySelector("#current").innerHTML = getGreeting() + ' ' + city;
-        document.querySelector("#current-weather").innerHTML = currentWeather;
-        document.querySelector("#current-desc").innerHTML = currentDesc;
-        document.querySelector("#current-temperature").innerHTML = currentTemperature;
+        // Fill Current
+        document.querySelector("#current").innerHTML                      = getGreeting() + ' ' + city;
+        document.querySelector("#current-weather").innerHTML              = currentWeather;
+        document.querySelector("#current-desc").innerHTML                 = currentDesc;
+        document.querySelector("#current-temperature").innerHTML          = currentTemperature;
         document.querySelector("#current-apparent-temperature").innerHTML = "Feels like "+ currentApparentTemperature;
-        document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].image}" width="100%">`;
-        document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
-        document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time));
-        document.querySelector(".hidden").style.display = "block";
+        document.querySelector("#today-img-div").innerHTML                = `<img src="${wmo[data.current.weather_code].image}" width="100%">`;
+        document.querySelector("#today-hari").innerHTML                   = getHari(new Date(data.current.time),"long");
+        document.querySelector("#today-date").innerHTML                   = getTanggal(new Date(data.current.time));
+        document.querySelector(".hidden").style.display                   = "block";
 
 
-        // HOURLY-----------------------------------------------------------
+        // Fill Hourly
         document.getElementById("current-hourly").innerHTML = ``
         for (let i = 0; i < 24; i++) {
             document.getElementById("current-hourly").innerHTML += 
@@ -121,7 +123,7 @@ async function getWeather(latitude, longitude, city) {
             </div>`
         }
 
-        // DAILY-----------------------------------------------------------
+        // Fill Daily
 
         document.getElementById("daily").innerHTML = ``
         data.daily.time.forEach((el, i) => {
