@@ -1,3 +1,6 @@
+*{
+    color:rgb(80, 80, 80);
+}
 body{
     font-family: "Inter", sans-serif;
     background-image: url("assets/bg.jpg");
@@ -28,6 +31,9 @@ p{
 }
 .font-size-200{
     font-size: 200px;
+}
+.font-size-180{
+    font-size: 180px;
 }
 .font-size-150{
     font-size: 150px;
@@ -73,4 +79,15 @@ p{
 .modal-img{
     width:200px;
     height:auto;
+}
+.modal-hover{
+    padding: 5px 20px;
+    margin: 0px 0px 0px 30px;
+}
+.modal-hover:hover{
+    /* padding: 0px 25px; */
+    /* font-size: 15px; */
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 20px;
+    cursor: pointer;
 }
