@@ -13,17 +13,20 @@
 </head>
 <body>
     <main class="container hidden">
-        <div class="row" style="min-height:calc(100vh - 60px);">
+        <div class="row">
             <div class="col-lg-4" style="margin-bottom:30px;margin-top:20px;"></div>
             <div class="col-lg-4" style="margin-bottom:30px;margin-top:20px;">
                 <h5 class="card-title font-weight-800">Weather App</h5>
                 <p class="card-text">Stay prepared for upcoming weather with accurate daily weather data.</p>
+                <!-- SEARCH FEATURE -->
                 <div class="d-flex mt-4" role="search">
                     <input id="city" class="form-control me-2 glass-effect" type="search" placeholder="Search City" aria-label="Search">
                     <button class="btn btn-outline-primary" onclick="getCity()">Search</button>
                 </div>
             </div>
             <div class="col-lg-4" style="margin-bottom:30px;margin-top:20px;"></div>
+        </div>
+        <div class="row">
             <div class="col-lg-9 align-self-stretch" style="padding-right: 100px;">
                 <div class="d-flex flex-column" style="height:100%">
                     <div class="row h-100">
@@ -32,27 +35,7 @@
                             <p id="current"></p>
                             <h2 class="font-size-100 font-weight-800" id="current-weather"></h2>
                             <p id="current-desc" style="text-align: justify;text-justify: inter-word;"></p>
-                            <br><br>
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <div class="d-flex flex-column text-center mb-3">
-                                        <span id="current-rain"></span>
-                                        <small>Rain</small>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex flex-column text-center mb-3">
-                                        <span id="current-showers"></span>
-                                        <small>Shower</small>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex flex-column text-center mb-3">
-                                        <span id="current-snowfall"></span>
-                                        <small>Snow</small>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <!-- CURRENT IMAGE -->
                         <div class="col-lg align-self-stretch">
@@ -70,12 +53,13 @@
             <div class="col-lg-3" style="text-align: right;">
                 <div class="d-flex flex-column" style="height:100%">
                     <div class="h-100">
-                    <!-- CURRENT TEMPERATURE -->
+                    <!-- CURRENT DATE & TEMPERATURE -->
                         <h5 id="today-hari"></h5>
                         <p id="today-date"></p>
                         <h2 class="font-size-180 font-weight-600" id="current-temperature"></h2>
                         <p id="current-apparent-temperature" style="margin-top:-20px;"></p>
                     </div>
+                    <!-- DAILY -->
                     <div class="flex-shrink-1 ml-4 mr-4" id="daily"></div>
                 </div>
             </div>

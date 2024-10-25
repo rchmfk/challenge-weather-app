@@ -99,9 +99,9 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#current").innerHTML = current() + ' ' + city;
         document.querySelector("#current-weather").innerHTML = currentWeather;
         document.querySelector("#current-desc").innerHTML = currentDesc;
-        document.querySelector("#current-rain").innerHTML = currentRain;
-        document.querySelector("#current-showers").innerHTML = currentShowers;
-        document.querySelector("#current-snowfall").innerHTML = currentSnowfall;
+        // document.querySelector("#current-rain").innerHTML = currentRain;
+        // document.querySelector("#current-showers").innerHTML = currentShowers;
+        // document.querySelector("#current-snowfall").innerHTML = currentSnowfall;
 
         document.querySelector("#current-temperature").innerHTML = currentTemperature;
         document.querySelector("#current-apparent-temperature").innerHTML = "Feels like "+ currentApparentTemperature;
