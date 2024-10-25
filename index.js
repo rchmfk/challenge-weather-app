@@ -1,29 +1,32 @@
-// -------------------------------- Define Today
+// Define Today ----------------------------------
 const hari = new Date();
 
-// -------------------------------- Call Function Get Location
+// Call Function Get Location ----------------------------------
 getLocation();
 
-// -------------------------------- Get Position
+// Get Position ----------------------------------
 function getPosition(position) {
+    // Define latitude & longitude
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
+
+    // Run getWeather  function using latitude & longitude
     getWeather(latitude, longitude, " ");
 }
-// -------------------------------- Get Location
+// Get Location ----------------------------------
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getPosition);
     }
 }
-// -------------------------------- Get Hari
+// Get Hari ----------------------------------
 function getHari(date,type){
     const options = {
         weekday: type
     };
     return date.toLocaleDateString("en-EN", options);
 }
-// -------------------------------- Get Tanggal
+// Get Tanggal ----------------------------------
 function getTanggal(date){
     const options = {
         year    : "numeric",
@@ -33,7 +36,7 @@ function getTanggal(date){
     return date.toLocaleDateString("en-EN", options);
 }
 
-// -------------------------------- Get City
+// Get City ----------------------------------
 async function getCity(){
     try {
         // Define
@@ -59,10 +62,13 @@ async function getCity(){
     }
 }
 
-// -------------------------------- current
+// current ----------------------------------
 function getGreeting(){
+    // Define
     const now = hari
     const hour = now.getHours()
+
+    // Return greeting
     if (hour < 12) {
         return 'Good Morning';
     } else if (hour < 16) {
@@ -74,7 +80,7 @@ function getGreeting(){
     }
 }
 
-// -------------------------------- Get Weather
+// Get Weather ----------------------------------
 async function getWeather(latitude, longitude, city) {
     try {
         // Define
@@ -105,7 +111,6 @@ async function getWeather(latitude, longitude, city) {
         document.querySelector("#today-date").innerHTML                   = getTanggal(new Date(data.current.time));
         document.querySelector(".hidden").style.display                   = "block";
 
-
         // Fill Hourly
         document.getElementById("current-hourly").innerHTML = ``
         for (let i = 0; i < 24; i++) {
@@ -123,9 +128,10 @@ async function getWeather(latitude, longitude, city) {
             </div>`
         }
 
-        // Fill Daily
+        // Clear Daily
+        document.getElementById("daily").innerHTML = ``;
 
-        document.getElementById("daily").innerHTML = ``
+        // Fill Daily
         data.daily.time.forEach((el, i) => {
             if(i>0){
                 document.getElementById("daily").innerHTML += `
