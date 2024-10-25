@@ -1,12 +1,8 @@
-function capitalize(str) {
-    return str[0].toUpperCase() + str.slice(1);
-}
-
 const hari = new Date();
 
-// -------------------------------- today
+// -------------------------------- current
 function current(){
-    const now = new Date()
+    const now = hari
     const hour = now.getHours()
     if (hour < 12) {
         return 'Good Morning';
@@ -18,13 +14,14 @@ function current(){
         return 'Good Night';
     }
 }
-// -------------------------------- Get Day
+// -------------------------------- Get Hari
 function getHari(date,type){
     const options = {
         weekday: type
     };
     return date.toLocaleDateString("en-EN", options);
 }
+// -------------------------------- Get Tanggal
 function getTanggal(date){
     const options = {
         year: "numeric",
@@ -33,6 +30,7 @@ function getTanggal(date){
     };
     return date.toLocaleDateString("en-EN", options);
 }
+// -------------------------------- Get Waktu
 function getWaktu(date){
     const options = {
         hour: "2-digit",
@@ -40,13 +38,13 @@ function getWaktu(date){
     };
     return date.toLocaleTimeString("en-EN", options);
 }
-
 // -------------------------------- Get Position
 function getPosition(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
-    getWeather(latitude, longitude, ' ');
+    getWeather(latitude, longitude, " ");
 }
+// -------------------------------- Get Location
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getPosition);
@@ -54,114 +52,79 @@ function getLocation() {
 }
 getLocation();
 
-// -------------------------------- Get City
 async function getCity(){
-    const city = document.getElementById("city").value;
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
-    const response = await fetch(url);
-    const data = await response.json();
-    const latitude = data.results[0].latitude;
-    const longitude = data.results[0].longitude;
-    getWeather(latitude, longitude, city);
-    document.getElementById("city").value = "";
-}
-
-
-
-async function getWeather(latitude, longitude, city) {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
     try {
+        const city = document.getElementById("city").value;
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
         const response = await fetch(url);
         const data = await response.json();
-        
-        // CURRENT---------------------------------------------------------
+        const latitude = data.results[0].latitude;
+        const longitude = data.results[0].longitude;
+        document.querySelector(".hidden").style.display = "none";
+        getWeather(latitude, longitude, city);
+        document.getElementById("city").value = "";
+    } catch (err) {
+        alert("Data tidak ditemukan");
+    } finally {
+        console.log("done");
+    }
+}
 
-        // document.querySelector("#today").innerHTML = current() + '<br>' + capitalize(city);
-        document.querySelector("#today-hari").innerHTML = getHari(new Date(data.current.time),"long");
-        document.querySelector("#today-date").innerHTML = getTanggal(new Date(data.current.time))+", "+getWaktu(new Date(data.current.time));
-        document.querySelector("#today-temperature").innerHTML = parseInt(data.current.temperature_2m)+"º";
-        document.querySelector("#today-temperature2").innerHTML = "Feels like "+parseInt(data.current.apparent_temperature)+"º";
-        // document.querySelector("#today-img-div").innerHTML = `<img class="position-absolute translate-middle" id="" src="${wmo[data.current.weather_code].illust}" width="450px" style="top:0px ;left:280px;">`;
-        document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].illust}" width="80%" >`;
-        
-        
-        document.getElementById("today-desc").innerHTML = `
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Interval</small></small>
-                        <h3 class="card-title">${data.current.interval}</h3>
-                        <small><small>${data.current_units.interval}</small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Relative Humidity</small></small>
-                        <h3 class="card-title">${data.current.relative_humidity_2m}</h3>
-                        <small><small>${data.current_units.relative_humidity_2m}</small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Precipitation</small></small>
-                        <h3 class="card-title">${data.current.precipitation}</h3>
-                        <small><small>${data.current_units.precipitation}</small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Cloud Cover</small></small>
-                        <h3 class="card-title">${data.current.cloud_cover}</h3>
-                        <small><small>${data.current_units.cloud_cover}</small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Wind Speed</small></small>
-                        <h3 class="card-title">${data.current.wind_speed_10m}</h3>
-                        <small><small>${data.current_units.wind_speed_10m}</small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Wind Direction</small></small>
-                        <h3 class="card-title">${data.current.wind_direction_10m}</h3>
-                        <small><small>${data.current_units.wind_direction_10m}</small></small>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body p-0">
-                    <div class="d-flex">
-                        <small class="me-auto" style="margin-top:auto;margin-bottom:auto;"><small>Wind Gusts</small></small>
-                        <h3 class="card-title">${data.current.wind_gusts_10m}</h3>
-                        <small><small>${data.current_units.wind_gusts_10m}</small></small>
-                    </div>
-                </div>
-            </div>
-        `;
+// -------------------------------- Get Weather
+async function getWeather(latitude, longitude, city) {
+    try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m,wind_gusts_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&&hourly=temperature_2m,weather_code`
+        const response = await fetch(url);
+        const data = await response.json();
+        // document.querySelector(".hidden").style.display = "block";
+        const currentTime                = data.current.time;
+        const currentInterval            = data.current.interval+" "+data.current_units.interval;
+        const currentTemperature         = `${parseInt(data.current.temperature_2m)}º`;
+        const currentRelativeHumidity    = data.current.relative_humidity_2m+""+data.current_units.relative_humidity_2m;
+        const currentApparentTemperature = parseInt(data.current.apparent_temperature)+"º";
+        const currentIsDay               = data.current.is_day+""+data.current_units.is_day;
+        const currentPrecipitation       = data.current.precipitation+" "+data.current_units.precipitation;
+        const currentRain                = `${data.current.rain} <small><small>${data.current_units.rain}</small></small>`;
+        const currentShowers             = `${data.current.showers} <small><small>${data.current_units.showers}</small></small>`;
+        const currentSnowfall            = `${data.current.snowfall} <small><small>${data.current_units.snowfall}</small></small>`;
+        const currentWeatherCode         = data.current.weather_code;
+        const currentCloudCover          = data.current.cloud_cover+""+data.current_units.cloud_cover;
+        const currentWindSpeed           = data.current.wind_speed_10m+" "+data.current_units.wind_speed_10m;
+        const currentWindDirection       = data.current.wind_direction_10m+""+data.current_units.wind_direction_10m;
+        const currentWindGusts           = data.current.wind_gusts_10m+" "+data.current_units.wind_gusts_10m;
+
+        const currentWeather             = wmo[currentWeatherCode].description;
+        const currentDesc                = `Cloud cover ${currentCloudCover}. Relative humidity is ${currentRelativeHumidity}. Precitipation ${currentPrecipitation}. Winds direction ${currentWindDirection} at ${currentWindSpeed} and ${currentWindGusts} gusts.`
+
+        document.querySelector("#current").innerHTML = current() + ' ' + city;
+        document.querySelector("#current-weather").innerHTML = currentWeather;
+        document.querySelector("#current-desc").innerHTML = currentDesc;
+        document.querySelector("#current-rain").innerHTML = currentRain;
+        document.querySelector("#current-showers").innerHTML = currentShowers;
+        document.querySelector("#current-snowfall").innerHTML = currentSnowfall;
+
+        document.querySelector("#current-temperature").innerHTML = currentTemperature;
+        document.querySelector("#current-apparent-temperature").innerHTML = "Feels like "+ currentApparentTemperature;
+        document.querySelector("#current-interval").innerHTML = "Interval "+ currentInterval;
+        document.querySelector("#today-img-div").innerHTML = `<img src="${wmo[data.current.weather_code].image}" width="100%">`;
+        document.querySelector(".hidden").style.display = "block";
+
 
         // HOURLY-----------------------------------------------------------
         document.getElementById("current-hourly").innerHTML = ``
         for (let i = 0; i < 24; i++) {
-            document.getElementById("current-hourly").innerHTML += `
-            <div class="list-group-item list-group-item-action flex-column align-items-start text-center" style="min-width:150px;">
-            <p class="card-text next-day">${data.hourly.time[i].split("T")[1]}</p>
-            <p class="card-title next-celcius">${parseInt(data.hourly.temperature_2m[i])}º</p>
-                <img class="" src="${wmo[data.hourly.weather_code[i]].image}" style="width:100%;margin:auto;margin-bottom:-20px;">
-                <small><small>${wmo[data.hourly.weather_code[i]].description}</small></small>
-            </div>
-            `
+            document.getElementById("current-hourly").innerHTML += 
+            `<div class="card glass-effect mb-4" style="min-width:80px;max-width:80px;background:none;margin-right:10px;">
+                <div class="card-body pb-4">
+                    <div class="d-flex flex-column position-relative text-center" style="height:100%">
+                        <img class="" src="${wmo[data.hourly.weather_code[i]].image}" style="margin:auto; width:40px;height:auto;">
+                        <b>${parseInt(data.hourly.temperature_2m[i])}º</b>
+                        <div class="position-absolute start-50 translate-middle glass-effect" style="top:85px;padding:2px 5px;border-radius:7px;">
+                            <small>${data.hourly.time[i].split("T")[1]}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>`
         }
 
         // DAILY-----------------------------------------------------------
@@ -170,12 +133,10 @@ async function getWeather(latitude, longitude, city) {
         data.daily.time.forEach((el, i) => {
             if(i>0){
                 document.getElementById("daily").innerHTML += `
-                <div data-bs-target="#myModal${i}" data-bs-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <b class="card-text next-day" style="margin:auto;">${getHari(new Date(data.daily.time[i]),"short")}</b>
-                        <h7 class="card-text next-celcius" style="margin:auto;">${parseInt(data.daily.temperature_2m_max[i])}º</h7>
-                        <img class="next-img" src="${wmo[data.daily.weather_code[i]].image}" style="margin:auto;">
-                    </div>
+                <div class="d-flex" data-bs-target="#myModal${i}" data-bs-toggle="modal">
+                    <div class="p-2 flex-grow-1" style="text-align:left;">${getHari(new Date(data.daily.time[i]),"short")}</div>
+                    <div class="p-2">${parseInt(data.daily.temperature_2m_max[i])}º</div>
+                    <img class="next-img" src="${wmo[data.daily.weather_code[i]].image}" style="margin:auto; width:50px;height:auto;">
                 </div>
                 <div class="modal fade" id="myModal${i}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -192,26 +153,10 @@ async function getWeather(latitude, longitude, city) {
                             </div>
                         </div>
                     </div>
-                </div>`   
+                </div>`
             }
         })
-
     } catch (error) {
         console.log(error);
     }
 }
-
-// async function getWeather() {
-//     try {
-//         const response = await fetch(url2);
-//         if (!response.ok) {
-//             throw new Error("Failed to fetch weather data");
-//         }
-//         const data = await response.json();
-//         console.log(data);
-//     } catch (err) {
-//         console.log(err);
-//     } finally {
-//         console.log("done");
-//     }
-// }

@@ -1,0 +1,76 @@
+body{
+    font-family: "Inter", sans-serif;
+    background-image: url("assets/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+main{
+    margin-top:30px;margin-bottom:30px;overflow: auto;
+}
+p{
+    margin: 0px;
+    font-size: 14px;
+}
+.hidden{
+    display:none;
+}
+.font-weight-600{
+    font-weight: 600;
+}
+.font-weight-700{
+    font-weight: 700;
+}
+.font-weight-800{
+    font-weight: 800;
+}
+.font-weight-900{
+    font-weight: 900;
+}
+.font-size-200{
+    font-size: 200px;
+}
+.font-size-150{
+    font-size: 150px;
+}
+.font-size-100{
+    font-size: 100px;
+}
+.font-size-60{
+    font-size: 60px;
+}
+.glass-effect{
+    background-color: rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1.5px solid rgba(0, 0, 0, 0.05);
+}
+.glass{
+    background-color: rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    padding: 50px 25px;
+    -webkit-box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+}
+.glass-no-shadow{
+    background-color: rgba(255, 255, 255, 0.06);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    padding: 50px 25px;
+    -webkit-box-shadow: 0 25px 23px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 25px 23px rgba(0, 0, 0, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.06);
+}
+.modal-backdrop { opacity: 0.2 !important; background-color: white;}
+
+#hourly, #current-hourly{
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.modal-img{
+    width:200px;
+    height:auto;
+}

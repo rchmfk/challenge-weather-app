@@ -1,170 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <style>
-        body{
-            font-family: "Open Sans", sans-serif;
-            padding: 50px 0px;
-            background-image: url("assets/bg.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        p{
-            margin:0px;
-        }
-        #today-img{
-            width:80%;
-            text-align: center;
-        }
-        #today-temperature{
-            font-size: 100px;
-            font-weight: 700;
-            text-align: right;
-        }
-        #today-hari{
-            text-align: right;
-        }
-        #today-date{
-            text-align: right;
-        }
-        
-        .list-group-item{
-            border:none;
-        }
-        .card{
-            border:none;
-            padding: 40px 24px;
-            border-radius: 16px;
-            background: var(--Background-Default, #FFF);
-        }
-        .list-group-item:hover{
-            cursor: pointer;
-        }
-        .n3xt-celcius{
-            font-weight: black;
-        }
-        .next-img{
-            width:50px;
-            height:50px;
-        }
-        .modal-img{
-            width:200px;
-            height:200px;
-        }
-        .glass{
-            background-color: rgba(255, 255, 255, 0.06);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-            padding: 50px 25px;
-            -webkit-box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
-            box-shadow: 0 25px 23px rgba(0, 0, 0, 0.15);
-            border: 1.5px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-        }
-        .glass-no-shadow{
-            background-color: rgba(255, 255, 255, 0.06);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-            padding: 50px 25px;
-            -webkit-box-shadow: 0 25px 23px rgba(0, 0, 0, 0.05);
-            box-shadow: 0 25px 23px rgba(0, 0, 0, 0.05);
-            border: 1.5px solid rgba(255, 255, 255, 0.06);
-        }
-        .modal-backdrop { opacity: 0.2 !important; background-color: white;}
-        #hourly{
-            max-width: 100%;
-            overflow-x: auto;
-        }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 id="today-hari"></h5>
-                        <p id="today-date"></p>
-                        <div class="d-flex">
-                            <div class="p-2 flex-grow-1">
-                                <div id="today-img-div" class=""></div>
-                            </div>
-                            <div class="p-2" style="text-align: right;">
-                                <b id="today-temperature"></b>
-                                <p id="today-temperature2"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div id="hourly" class="col-12">
-                            <ul id="current-hourly" class="list-group list-group-horizontal">
-                            </ul>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container hidden">
+        <div class="row" style="min-height:calc(100vh - 60px);">
+            <div class="col-lg align-self-stretch">
+                <div class="d-flex flex-column" style="height:100%">
+                    <div class="p-2 h-100">
+                        <p id="current"></p>
+                        <h2 class="font-size-100 font-weight-800" id="current-weather"></h2>
+                        <p id="current-desc" style="text-align: justify;text-justify: inter-word;"></p>
+                        <div class="d-flex mt-4" role="search">
+                            <input id="city" class="form-control me-2" type="search" placeholder="Search City" aria-label="Search">
+                            <button class="btn btn-outline-primary" onclick="getCity()">Search</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="row">
-                    <div class="col-12" id="today-desc">
-                        
-                    </div>
-                </div>
-                <!-- <div class="list-group" id="today-desc">
-                </div> -->
-            </div>
-            <div class="col-lg-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Weather App</h5>
-                        <p class="card-text">Stay prepared for upcoming weather with accurate daily weather data.</p>
-                        <div class="input-group mb-3">
-                            <input id="city" type="text" class="form-control" placeholder="Search City" aria-label="Search City" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-primary" type="button" onclick="getCity()">Search</button>
+            <div class="col-lg-5 align-self-stretch text-center">
+                <div class="d-flex flex-column" style="height:100%">
+                    <div id="today-img-div" class="p-2 h-100"></div>
+                    <div class="p-2 flex-shrink-1">
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex flex-column text-center mb-3">
+                                    <span id="current-rain"></span>
+                                    Rain
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex flex-column text-center mb-3">
+                                    <span id="current-showers"></span>
+                                    Shower
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex flex-column text-center mb-3">
+                                    <span id="current-snowfall"></span>
+                                    Snow
+                                </div>
                             </div>
                         </div>
-                        <!-- <div class="card mb-4"> -->
-                            <!-- <div class="card-body"> -->
-                                <div class="list-group" id="daily"></div>
-                            <!-- </div> -->
-                        <!-- </div> -->
+                    </div>
+                    <div id="hourly mb-4" class="p-2 flex-shrink-1">
+                        <div id="current-hourly" class="d-flex"></div>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg align-self-stretch" style="text-align: right;">
+                <div class="d-flex flex-column" style="height:100%">
+                    <div class="h-100">
+                        <h2 class="font-size-200 font-weight-600" id="current-temperature"></h2>
+                        <p id="current-apparent-temperature" style="margin-top:-40px;"></p>
+                        <p id="current-interval"></p>
+                    </div>
+                    <div class="flex-shrink-1 ml-4 mr-4" id="daily"></div>
+                </div>
+
+
             </div>
         </div>
-    </div>
-    <div class="container pt-4 pb-4 align-center">
-        <div class="row">
-            <div class="col-lg-3">    
-            </div>
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-4"></div>
-                    <div class="col-4"></div>
-                </div>
-                <div id="today-img-div" class="container text-center align-middle">
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <!-- <h3 id="today" style="text-transform: capitalize;"></h3> -->
-                <div class="container">
-                    
-                </div>
-            </div>
-            
-            
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
-    <script src="wmo.js"></script>
+    </main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="index.js"></script>
+<script src="wmo.js"></script>
+</html>
