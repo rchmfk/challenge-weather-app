@@ -1,5 +1,18 @@
 const hari = new Date();
 
+// -------------------------------- Get Position
+function getPosition(position) {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    getWeather(latitude, longitude, " ");
+}
+// -------------------------------- Get Location
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getPosition);
+    }
+}
+getLocation();
 // -------------------------------- Get Hari
 function getHari(date,type){
     const options = {
@@ -24,19 +37,6 @@ function getWaktu(date){
     };
     return date.toLocaleTimeString("en-EN", options);
 }
-// -------------------------------- Get Position
-function getPosition(position) {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
-    getWeather(latitude, longitude, " ");
-}
-// -------------------------------- Get Location
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getPosition);
-    }
-}
-getLocation();
 
 async function getCity(){
     try {
