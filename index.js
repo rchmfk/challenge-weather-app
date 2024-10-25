@@ -56,7 +56,7 @@ async function getCity(){
         // Show display
         document.getElementById("city").value = "";
     } catch (err) {
-        alert("Data tidak ditemukan");
+        alert("Not Found");
     } finally {
         console.log("done");
     }
